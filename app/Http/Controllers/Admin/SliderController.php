@@ -12,7 +12,7 @@ class SliderController extends Controller
     {
         //
         $sliders = Slider::paginate(5);
-        return view('slider.index', \compact('sliders'));
+        return view('admin.slider.index', \compact('sliders'));
     }
 
     /**
@@ -21,7 +21,7 @@ class SliderController extends Controller
     public function create()
     {
         //
-        return view('slider.create');
+        return view('admin.slider.create');
     }
 
     /**
@@ -41,8 +41,7 @@ class SliderController extends Controller
         $slider->type = $request->type;
         $slider->photo =  $imageName;
         $slider->save();
-
-        return redirect()->back()->with('success', 'slider created successfully.');
+        return redirect()->route('slider.index')->with('success', 'Slider Created Successfully.');
     }
 
     /**
@@ -76,7 +75,6 @@ class SliderController extends Controller
     {
         //
         $Slider = Slider::find($id)->delete();
-        return redirect()->back()->with('success', 'slider deleted successfully.');
-   
+        return redirect()->back()->with('success', 'Slider Deleted Successfully.');
     }
 }

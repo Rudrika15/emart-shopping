@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Optiongroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+
 class OptiongroupController extends Controller
 {
     /**
@@ -13,13 +14,13 @@ class OptiongroupController extends Controller
      */
     public function index()
     {
-       
+
         return view('admin.optionGroup.index');
     }
     public function getAllData(Request $request)
     {
         if ($request->ajax()) {
-          
+
             $data = Optiongroup::with('option')->select('*');
 
             return \Yajra\DataTables\DataTables::of($data)
@@ -87,7 +88,7 @@ class OptiongroupController extends Controller
         $optionGroup->save();
         return response()->json([
             'success' => true,
-            'message' => 'Details edited'
+            'message' => 'Details Edited Successfully.'
         ]);
     }
 

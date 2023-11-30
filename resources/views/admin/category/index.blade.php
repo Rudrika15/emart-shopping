@@ -6,7 +6,6 @@ Category View || Shop
 @section('content')
 
 <div class="card">
-    <h1>hello</h1>
     <div class="card-header">
         <div class="d-flex justify-content-between">
             <div class="fs-4 fw-1">Category View</div>
@@ -30,7 +29,7 @@ Category View || Shop
                 <tr>
                     <th>Sr No</th>
                     <th>Title</th>
-                    <th>icon</th>
+                    <th>Icon</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -42,7 +41,9 @@ Category View || Shop
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+    integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
     $(function() {
         $.ajaxSetup({
@@ -69,7 +70,7 @@ Category View || Shop
                     render: function(data, type, full, meta) {
                         // Check if the "data" is empty or null
                         if (data) {
-                            return '<img src="{{url(' / category ')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
+                            return '<img src="{{url('/category')}}' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
                         }
                         return 'No icon'; // Display "No Logo" if data is empty or null
                     }

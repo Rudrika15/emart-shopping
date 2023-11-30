@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\AddToCartController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LinkVariantController;
 use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\SliderController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -85,11 +87,11 @@ Route::post('/product/update', [ProductController::class, 'update'])->name('prod
 Route::get('/product/delete/{id?}', [ProductController::class, 'delete'])->name('product.delete');
 Route::get('/product/addVarient/{id?}', [ProductController::class, 'addVarient'])->name('product.addVarient');
 Route::post('product/storeProductVarient', [ProductController::class, 'storeProductVarient'])->name('product.storeProductVarient');
-Route::get('product/getStockAndPrice/{productGroupId}', [ProductController::class,'getStockAndPrice'])->name('getStockAndPrice');
+Route::get('product/getStockAndPrice/{productGroupId}', [ProductController::class, 'getStockAndPrice'])->name('getStockAndPrice');
 Route::get('product/deleteProductStockPrice/{id?}', [ProductController::class, 'deleteProductStockPrice'])->name('deleteProductStockPrice');
 Route::get('product/deleteProductGallery/{id?}', [ProductController::class, 'deleteProductGallery'])->name('deleteProductGallery');
 
-Route::get('/product/checkProductExists/{productGroupId}',[ProductController::class,'checkProductExists'])->name('checkProductExists');
+Route::get('/product/checkProductExists/{productGroupId}', [ProductController::class, 'checkProductExists'])->name('checkProductExists');
 
 
 
@@ -141,4 +143,4 @@ Route::get('whishlist/getAllData', [WhishlistController::class, 'getAllData'])->
 
 // visitor
 
-Route::get('visitor/product', [ControllersVisitorProductController::class,'productview']);
+Route::get('visitor/product', [ControllersVisitorProductController::class, 'productview']);

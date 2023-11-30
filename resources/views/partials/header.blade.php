@@ -5,10 +5,10 @@
 
     <ul class="sidebar-nav">
         <li class="# ? 'active' : '' }}">
-            <a href="#"><i class="fa fa-home"></i>Home</a>
+            <a href="/home"><i class="fa fa-home"></i>Home</a>
         </li>
         <li class="{{ Route::is('category.index') ? 'active' : '' }}">
-            <a href="{{route('category.index')}}"><i class="fa fa-home"></i>Category</a>
+            <a href="{{route('category.index')}}"><i class="fa fa-list-alt"></i>Category</a>
         </li>
         <li class="{{ Route::is('product.index') ? 'active' : '' }}">
             <a href="{{route('product.index')}}"><i class="fa fa-product-hunt" aria-hidden="true"></i>Product</a>

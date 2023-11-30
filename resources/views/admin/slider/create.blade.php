@@ -1,4 +1,4 @@
-@extends('layouts.master') 
+@extends('layouts.master')
 @section('title')
 Slider Add || Shop
 @endsection
@@ -24,7 +24,7 @@ Slider Add || Shop
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Title</label>
                 <select class="form-control" id="type" name="type">
-                    <option selected disabled>--select type--</option>
+                    <option selected disabled>--Select Type--</option>
                     <option>Home</option>
                     <option>Inside</option>
                 </select>

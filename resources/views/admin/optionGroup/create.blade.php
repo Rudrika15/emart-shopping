@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="card-body">
-        <form id="create" method="POST">
+        <form id="optionCreate" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Title</label>
@@ -25,7 +25,7 @@
 
 <script>
     $(function() {
-        $("#create").on("submit", function(e) {
+        $(".optionCreate").on("submit", function(e) {
             e.preventDefault();
             var formData = new FormData();
             formData.append("_token", "{{csrf_token()}}");

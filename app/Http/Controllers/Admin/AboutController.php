@@ -12,7 +12,7 @@ class AboutController extends Controller
     {
         //
         $abouts = About::paginate(10);
-        return view('about.index', compact('abouts'));
+        return view('admin.about.index', compact('abouts'));
     }
 
     /**
@@ -21,7 +21,7 @@ class AboutController extends Controller
     public function create()
     {
         //
-        return view('about.create');
+        return view('admin.about.create');
     }
 
     /**
@@ -36,10 +36,10 @@ class AboutController extends Controller
         $about = new About();
         $about->about = $request->about;
         $about->save();
-        return redirect()->back()->with('success', 'About created successfully.');
+        return redirect()->route('about.index')->with('success', 'About Created Successfully.');
     }
 
-    
+
     /**
      * Display the specified resource.
      */
@@ -71,7 +71,6 @@ class AboutController extends Controller
     {
         //
         $about = About::find($id)->delete();
-        return redirect()->back()->with('success', 'About deleted successfully.');
-   
+        return redirect()->back()->with('success', 'About Deleted Successfully.');
     }
 }

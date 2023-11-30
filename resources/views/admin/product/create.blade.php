@@ -28,7 +28,8 @@
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Photo</label>
                 <input type="file" class="form-control" id="photo" name="photo" />
-                <img id="preview-photo" src="{{asset('/product/default.png')}}" name="preview-photo" class="mt-3" width="100px" height="100px"> 
+                <img id="preview-photo" src="{{asset('/product/default.png')}}" name="preview-photo" class="mt-3"
+                    width="100px" height="100px">
             </div>
 
             <div class="mb-3">
@@ -44,12 +45,14 @@
                 <div class="row">
                     <div class="col">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="isTrending" name="isTrending" id="isTrending"> Is trending
+                            <input class="form-check-input" type="checkbox" value="isTrending" name="isTrending"
+                                id="isTrending"> Is trending
                         </label>
                     </div>
                     <div class="col">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="isRecommend" name="isRecommend" id="isRecommend"> Is Recommend
+                            <input class="form-check-input" type="checkbox" value="isRecommend" name="isRecommend"
+                                id="isRecommend"> Is Recommend
                         </label>
                     </div>
                 </div>
@@ -73,7 +76,7 @@
                     </div>
                 </div>
             </div>
-           
+
             <button type="submit" class="btn btn-primary my-3">Submit</button>
         </form>
 
@@ -81,15 +84,15 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-    <!-- FOR SWEET ALERT -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
-    
-    <script type="text/javascript">
-        $(document).ready(function() {
+</script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<!-- FOR SWEET ALERT -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -102,7 +105,7 @@
                 }
                 reader.readAsDataURL(this.files[0]);
             });
-            $("#productForm").submit(function(e) {
+            $(".productForm").submit(function(e) {
                 e.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
@@ -127,10 +130,10 @@
                 });
             });
         });
-    </script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
+</script>
+<script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
             .create(document.querySelector('#detail'))
             .then(editor => {
                 console.log(about);
@@ -138,9 +141,9 @@
             .catch(error => {
                 console.error(error);
             });
-    </script>
-    <script>
-        ClassicEditor
+</script>
+<script>
+    ClassicEditor
             .create(document.querySelector('#tag'))
             .then(editor => {
                 console.log(about);
@@ -148,11 +151,11 @@
             .catch(error => {
                 console.error(error);
             });
-    </script>
-    {{-- <script>
-        window.onload = function() {
+</script>
+{{-- <script>
+    window.onload = function() {
             CKEDITOR.replace('detail');
             CKEDITOR.replace('tag');
         };
-    </script> --}}
-    @stop
+</script> --}}
+@stop

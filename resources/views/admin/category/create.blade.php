@@ -33,7 +33,8 @@ Category Add || Shop
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Icon</label>
                 <input type="file" class="form-control" id="icon" name="icon" />
-                <img id="preview-icon" src="/category/default.png" name="preview-icon" class="mt-3" width="100px" height="100px">
+                <img id="preview-icon" src="/category/default.png" name="preview-icon" class="mt-3" width="100px"
+                    height="100px">
                 <span class="text-danger">
                     @error('icon')
                     {{$message}}
