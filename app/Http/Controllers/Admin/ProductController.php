@@ -33,7 +33,7 @@ class ProductController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="' . URL::route('product.edit', $row->id) . '"data-toggle="tooltip" data-original-title="Edit" class="btn btn-primary btn-sm editProduct">Edit</a>';
-                    $btn = $btn . '<a href="javascript:void(0)"  data-id="' . $row->id . '" class="deleteProduct ms-2 btn btn-danger btn-sm">Delete</a>';
+                    $btn = $btn . '<a href="javascript:void(0)"  data-id="' . $row->id . '" class="deleteProduct m-1 btn btn-danger btn-sm">Delete</a>';
                     $btn =  $btn . '<a href="' . URL::route('product.addVarient', $row->id) . '"data-toggle="tooltip" data-original-title="Add Varient" class="btn btn-success btn-sm addVarient mt-2">Add Varient</a>';
                     return  $btn;
                 })
@@ -146,7 +146,8 @@ class ProductController extends Controller
         // Update the product properties
         $product->title = $request->title;
         $product->catId = $request->catId;
-        $product->photo = "abc"; // Update this with your photo logic
+        $product->photo = time() . '.' . $request->photo->extension();
+        $request->photo->move(public_path('product'),  $product->photo); // Update this with your photo logic
         $product->detail = $request->detail;
         $product->tag = $request->tag;
         // ...

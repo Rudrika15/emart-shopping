@@ -70,7 +70,7 @@ Category View || Shop
                     render: function(data, type, full, meta) {
                         // Check if the "data" is empty or null
                         if (data) {
-                            return '<img src="{{url('/category')}}' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
+                            return '<img src="{{url('/category')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
                         }
                         return 'No icon'; // Display "No Logo" if data is empty or null
                     }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use App\Models\AddToCart;
@@ -17,11 +18,12 @@ class AddToCartController extends Controller
 
         //
         // return  $data = AddToCart::select('*');
-           
+
         return view('admin.cart.index');
     }
     public function getAllData(Request $request)
     {
+        $carts = AddToCart::all();
         if ($request->ajax()) {
             $data = AddToCart::select('*');
             return \Yajra\DataTables\DataTables::of($data)

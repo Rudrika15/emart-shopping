@@ -7,9 +7,9 @@
                 <a href="{{route('optionGroup.create')}}" class="btn btn-success">Add New Option Group</a>
                 <a href="{{route('link.create')}}" class="btn btn-info">Add New Link Product</a>
             </div>
-           
-               
-          
+
+
+
         </div>
     </div>
     <div class="card-body">

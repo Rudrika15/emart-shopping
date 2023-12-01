@@ -7,22 +7,18 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class CategoryExport implements  FromCollection, WithHeadings
+class CategoryExport implements FromCollection
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
-        return Category::select('title')
-        ->orderby('id','desc')
-        ->get();
+        return Category::all();
     }
     //heading
     public function headings(): array
     {
-        return [ "Category"];
+        return ["Category"];
     }
-    
-    
 }

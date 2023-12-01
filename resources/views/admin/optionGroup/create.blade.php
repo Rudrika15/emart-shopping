@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="card-body">
-        <form id="optionCreate" method="POST">
+        <form id="optionCreate" action="{{route('optionGroup.store')}}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Title</label>
@@ -23,7 +23,10 @@
     </div>
 </div>
 
+
+
 <script>
+    console.log("Script is running");
     $(function() {
         $(".optionCreate").on("submit", function(e) {
             e.preventDefault();
@@ -34,8 +37,8 @@
                 url: "{{route('optionGroup.store')}}",
                 data: formData,
                 contentType: false,
-                processData: false,
-                type: "post",
+                processData: true,
+                type: "POST",
                 success: function(response) {
                     if (response.status == 200) {
                         Swal.fire(

@@ -9,14 +9,14 @@
         </div>
     </div>
     <div class="card-body">
-           
-    @if ($message = Session::get('success'))
+
+        @if ($message = Session::get('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{$message}}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-       
+
         <table class="table table-bordered data-table">
             <thead>
                 <tr>
@@ -34,9 +34,10 @@
                     ?>
                 <tr>
                     <td>{{$srNo}}</td>
-                    <td>{!!$about->about!!}</td>
-                    <td style="width: 150px;">Edit ||<a href="{{route('about.delete')}}/{{$about->id}}" class="btn btn-danger"> Delete</a></td>
-                   </tr>
+                    <td>{!!$about->About!!}</td>
+                    <td style="width: 150px;"><a href="{{route('about.delete')}}/{{$about->id}}" class="btn btn-danger">
+                            Delete</a></td>
+                </tr>
                 <?php  }?>
             </tbody>
         </table>

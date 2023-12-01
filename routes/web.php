@@ -64,7 +64,7 @@ Route::get('optionGroup/index', [OptiongroupController::class, 'index'])->name('
 Route::get('optionGroup/getAllData', [OptiongroupController::class, 'getAllData'])->name('optionGroup.getAllData');
 Route::post('optionGroup/store', [OptiongroupController::class, 'store'])->name('optionGroup.store');
 Route::get('/optionGroup/edit/{id?}', [OptiongroupController::class, 'edit'])->name('optionGroup.edit');
-Route::post('/optionGroup/update', [OptiongroupController::class, 'update'])->name('optionGroup.update');
+Route::post('/optionGroup/update/{id?}', [OptiongroupController::class, 'update'])->name('optionGroup.update');
 Route::get('/optionGroup/delete/{id?}', [OptiongroupController::class, 'delete'])->name('optionGroup.delete');
 
 // option Routes

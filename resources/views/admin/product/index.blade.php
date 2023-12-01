@@ -23,7 +23,7 @@
                     <th>startDate</th>
                     <th>endDate</th>
                     <th>discount</th>
-                    <th width="200px">Action</th>
+                    <th style="width: 100%">Action</th>
                 </tr>
             </thead>
             <tbody></tbody>

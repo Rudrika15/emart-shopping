@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\CategoryExport;
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-// use Maatwebsite\Excel\Facades\Excel;
-
-use Illuminate\Support\Facades\URL;
+use App\Exports\CategoryExport;
 use Yajra\DataTables\DataTables;
+// use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\URL;
+
+
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
 class CategoryController extends Controller
@@ -123,7 +126,7 @@ class CategoryController extends Controller
         $category->save();
         return response()->json([
             'success' => true,
-            'message' => 'Category detail edited'
+            'message' => 'Category detail edited successfully.'
         ]);
     }
     public function delete($id)
@@ -131,12 +134,12 @@ class CategoryController extends Controller
         Category::find($id)->delete();
     }
 
-    // public function export()
-    // {
-    //     return Excel::download(new CategoryExport, 'category.xlsx');
-    // }
-    // public function exportcsv()
-    // {
-    //     return Excel::download(new CategoryExport, 'category.csv');
-    // }
+    public function export()
+    {
+        return Excel::download(new CategoryExport, 'category.xlsx');
+    }
+    public function exportcsv()
+    {
+        return Excel::download(new CategoryExport, 'category.csv');
+    }
 }

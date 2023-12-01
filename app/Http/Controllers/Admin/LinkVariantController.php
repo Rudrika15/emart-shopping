@@ -9,22 +9,23 @@ use App\Models\Option;
 use App\Models\Optiongroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
 class LinkVariantController extends Controller
 {
     public function index()
     {
-        $productGroups =LinkVariant::groupBy('productGroup')
-        ->get('productGroup');
-        
+        $productGroups = LinkVariant::groupBy('productGroup')
+            ->get('productGroup');
+
         $data = [];
-        foreach($productGroups as $product){
-            $productOptions = LinkVariant::where('productGroup','=',$product->productGroup)->get();
+        foreach ($productGroups as $product) {
+            $productOptions = LinkVariant::where('productGroup', '=', $product->productGroup)->get();
             $newdata = [];
             $newdata['group'] = $product;
             $newdata['options'] = $productOptions;
-            array_push($data,$newdata);
+            array_push($data, $newdata);
         }
- 
+
         return view('Admin.LinkProduct.index', compact('data'));
     }
 
@@ -33,12 +34,12 @@ class LinkVariantController extends Controller
      */
     public function create(Request $request)
     {
-        
-        $category=Category::all();
-        $categoryData=Category::all();
+
+        $category = Category::all();
+        $categoryData = Category::all();
         $optionGroups =  Optiongroup::all();
         $options =  Option::all();
-        return view('Admin.LinkProduct.create', compact('categoryData','optionGroups', 'options','category'));
+        return view('Admin.LinkProduct.create', compact('categoryData', 'optionGroups', 'options', 'category'));
     }
 
     /**
@@ -51,7 +52,7 @@ class LinkVariantController extends Controller
     //     for ($i = 0; $i < count($request->optiongroup); $i++) {
     //         $opt = $request->optiongroup[$i];
     //         $title  = $request->title[$i];
-            
+
 
     //         $linkVariant = new LinkVariant();
     //         $linkVariant->productGroup = $id;
@@ -59,48 +60,48 @@ class LinkVariantController extends Controller
     //         $linkVariant->option = $title;
     //         $linkVariant->categoryId=$categoryId;
     //         $linkVariant->save();
-                    
+
     //     }
     //     return redirect()->route('link.index');
-          
+
     // }
     public function store(Request $request)
-{
-    $id = Str::uuid();
-    $categoryId = $request->categoryId;
+    {
+        $id = Str::uuid();
+        $categoryId = $request->categoryId;
 
-    // Check if the inputs are present in the request
-    if ($request->filled('optiongroup')  && $request->title) {
-        $optionGroups = $request->input('optiongroup');
-        $titles = $request->input('title');
-        return response()->json([
-            'data'=>[$optionGroups, $titles]
-        ]);
-        // Ensure that the option groups and titles have the same count
-        if (count($optionGroups) !== count($titles)) {
+        // Check if the inputs are present in the request
+        if ($request->filled('optiongroup')  && $request->title) {
+            $optionGroups = $request->input('optiongroup');
+            $titles = $request->input('title');
             return response()->json([
-                'messgae'=>"First Error"
+                'data' => [$optionGroups, $titles]
+            ]);
+            // Ensure that the option groups and titles have the same count
+            if (count($optionGroups) !== count($titles)) {
+                return response()->json([
+                    'messgae' => "First Error"
+                ]);
+            }
+
+            foreach ($optionGroups as $index => $opt) {
+                // Create a new LinkVariant for each selected option
+                $linkVariant = new LinkVariant();
+                $linkVariant->productGroup = $id;
+                $linkVariant->optionGroup = $opt;
+                $linkVariant->option = $titles[$index]; // Assign the selected option
+                $linkVariant->categoryId = $categoryId;
+                $linkVariant->save();
+            }
+            return response()->json([
+                'messgae' => "Created"
+            ]);
+        } else {
+            return response()->json([
+                'messgae' => "Last Error"
             ]);
         }
-
-        foreach ($optionGroups as $index => $opt) {
-            // Create a new LinkVariant for each selected option
-            $linkVariant = new LinkVariant();
-            $linkVariant->productGroup = $id;
-            $linkVariant->optionGroup = $opt;
-            $linkVariant->option = $titles[$index]; // Assign the selected option
-            $linkVariant->categoryId = $categoryId;
-            $linkVariant->save();
-        }
-        return response()->json([
-            'messgae'=>"Created"
-        ]);
-    } else {
-        return response()->json([
-            'messgae'=>"Last Error"
-        ]);    
     }
-}
 
     /**
      * Display the specified resource.
@@ -132,12 +133,11 @@ class LinkVariantController extends Controller
     public function delete($id)
     {
         // return $id;
-        $linkVariantIds =  LinkVariant::where('productGroup','=',$id)->get();
-        foreach($linkVariantIds as $linkVariantId)
-        {
-            $ids= $linkVariantId->id;
+        $linkVariantIds =  LinkVariant::where('productGroup', '=', $id)->get();
+        foreach ($linkVariantIds as $linkVariantId) {
+            $ids = $linkVariantId->id;
             $linkVariantDelete =  LinkVariant::find($ids)->delete();
         }
-    return redirect()->back()->with("success", "Deleted Successfully");
+        return redirect()->back()->with("success", "Deleted Successfully");
     }
 }

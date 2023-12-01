@@ -1,4 +1,4 @@
-@extends('layouts.master') 
+@extends('layouts.master')
 @section('title')
 Variant Add || Shop
 @endsection
@@ -8,7 +8,7 @@ Variant Add || Shop
         <div class="d-flex justify-content-between">
             <div class="fs-4 fw-1">Link Product Add</div>
             <div class="">
-                <a href="" class="btn btn-success">Back</a>
+                <a href="{{route('link.index')}}" class="btn btn-success">Back</a>
             </div>
         </div>
     </div>
@@ -20,41 +20,41 @@ Variant Add || Shop
         </div>
         @endif
         <form id="create" action="{{route('link.store')}}" method="POST">
-            @csrf   
+            @csrf
             <div class="row">
                 <div class="mb-3 col">
                     <label for="exampleInputEmail1" class="form-label">Category</label>
 
                     <select name="categoryId" id="categoryId" class="form-control">
-                        <option selected>--Select Category--</option>
+                        <option selected> --Select Category--</option>
                         @foreach ($category as $category)
-                            <option value="{{$category->id}}">{{$category->title}}</option>
+                        <option value="{{$category->id}}">{{$category->title}}</option>
                         @endforeach
-                        
+
                     </select>
                 </div>
-                
+
                 @foreach ($optionGroups as $optionGroup)
-                        <div class="mb-3 col option-group">
-                            <label for="exampleInputEmail1" class="form-label">
-                                <input type="hidden" value="{{$optionGroup->optionGroupName}}" name='optiongroup[]' />
-                                <input type="hidden" value="{{ $optionGroup->categoryId }}" name='categoryIds[]' />
-                                {{ $optionGroup->optionGroupName }}
-                            </label>
-                           
-                                <select class="form-control" id="title" name="title[]">
-                                    <option selected disabled>--Select {{ $optionGroup->optionGroupName }}--</option>
-                                    @foreach ($options as $option)
-                                    @if ($optionGroup->id === $option->optionGroupId)
-                                    <option value="{{ $option->option }}">{{ $option->option }}</option>
-                                    @endif
-                                    @endforeach
-                                </select>
-                            
-                        </div>
-                        
+                <div class="mb-3 col option-group">
+                    <label for="exampleInputEmail1" class="form-label">
+                        <input type="hidden" value="{{$optionGroup->optionGroupName}}" name='optiongroup[]' />
+                        <input type="hidden" value="{{ $optionGroup->categoryId }}" name='categoryIds[]' />
+                        {{ $optionGroup->optionGroupName }}
+                    </label>
+
+                    <select class="form-control" id="title" name="title[]">
+                        <option selected disabled>--Select {{ $optionGroup->optionGroupName }}--</option>
+                        @foreach ($options as $option)
+                        @if ($optionGroup->id === $option->optionGroupId)
+                        <option value="{{ $option->option }}">{{ $option->option }}</option>
+                        @endif
+                        @endforeach
+                    </select>
+
+                </div>
+
                 @endforeach
-                
+
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -86,27 +86,27 @@ Variant Add || Shop
         // Trigger the change event initially to set the initial state.
         $('#categoryId').trigger('change');
     });
-</script> 
+</script>
 
 
 {{-- @foreach ($optionGroups as $optionGroup)
-                    <div class="mb-3 col option-group">
-                        <label for="exampleInputEmail1" class="form-label">
-                            <input type="hidden" value="{{ $optionGroup->categoryId }}" name='categoryIds[]' />
-                            {{ $optionGroup->optionGroupName }}
+<div class="mb-3 col option-group">
+    <label for="exampleInputEmail1" class="form-label">
+        <input type="hidden" value="{{ $optionGroup->categoryId }}" name='categoryIds[]' />
+        {{ $optionGroup->optionGroupName }}
 
-                           
-                        
-                        <select class="form-control" id="title" name="title[]">
-                            <option selected disabled>--Select {{ $optionGroup->optionGroupName }}--</option>
-                            @foreach ($options as $option)
-                            @if ($optionGroup->id === $option->optionGroupId)
-                            <option value="{{ $option->option }}">{{ $option->option }}</option>
-                            @endif
-                            @endforeach
-                        </select>
-                    </div>
-                    
-                @endforeach --}}
+
+
+        <select class="form-control" id="title" name="title[]">
+            <option selected disabled>--Select {{ $optionGroup->optionGroupName }}--</option>
+            @foreach ($options as $option)
+            @if ($optionGroup->id === $option->optionGroupId)
+            <option value="{{ $option->option }}">{{ $option->option }}</option>
+            @endif
+            @endforeach
+        </select>
+</div>
+
+@endforeach --}}
 
 @stop

@@ -19,17 +19,43 @@
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Category</label>
                 <select class="form-control" id="catId" name="catId">
-                    <option selected disabled>--Select Category--</option>
+                    <option> --Select
+                        Category-- </option>
 
                     @foreach($category as $category)
-                    <option value="{{$category->id}}">{{$category->title}}</option>
+                    <option value="{{ $category->id }}" {{ old('catId', $product->catId) == $category->id ? 'selected' :
+                        '' }}>
+                        {{ $category->title }} </option>
                     @endforeach
                 </select>
             </div>
+
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Photo</label>
-                <input type="file" class="form-control" value="{{$product->photo}}" id="photo" name="photo" />
+                <label for="Photo" class="form-label">Photo</label>
+                <input type="file" value="{{$product->photo}}" id="photo" name="photo" class="form-control"
+                    placeholder="Photo" />
+                <br>
+                <img id="preview-photo" src="{{ url('/product/' . $product->photo) }}" alt="{{$product->photo}}"
+                    class="mt-3" style="height:100px; width: 100px;">
             </div>
+
+
+            {{-- <div class="mb-3">
+                <label for="photo" class="form-label">Photo</label>
+                <input type="file" class="form-control" id="photo" name="photo" />
+
+                @if ($product->photo)
+                <div class="mt-3">
+                    <strong>Current Photo:</strong>
+                    <br>
+                    <img src="{{ asset('product/' . $product->photo) }}" name="preview-photo" class="mt-2" width="100px"
+                        height="100px">
+                </div>
+                @else
+                <img src="{{ asset('/product/default.png') }}" name="preview-photo" class="mt-3" width="100px"
+                    height="100px">
+                @endif
+            </div> --}}
             <!-- <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Product Gallery <sup class="text-danger"> (To add multiple photo press control button and select image)</sup></label>
                 <input type="file" multiple class="form-control" id="files"  name="files" />
@@ -47,12 +73,14 @@
                 <div class="row">
                     <div class="col">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="isTrending" name="isTrending" id="isTrending"> Is trending
+                            <input class="form-check-input" type="checkbox" value="isTrending" name="isTrending"
+                                id="isTrending"> Is trending
                         </label>
                     </div>
                     <div class="col">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="isRecommend" name="isRecommend" id="isRecommend"> Is Recommend
+                            <input class="form-check-input" type="checkbox" value="isRecommend" name="isRecommend"
+                                id="isRecommend"> Is Recommend
                         </label>
                     </div>
                 </div>
@@ -61,15 +89,18 @@
                 <div class="row">
                     <div class="col">
                         <label class="form-check-label"> Start Date </label>
-                        <input class="form-control" type="date" value="{{$product->startDate}}" name="startDate" id="startDate">
+                        <input class="form-control" type="date" value="{{$product->startDate}}" name="startDate"
+                            id="startDate">
                     </div>
                     <div class="col">
                         <label class="form-check-label">End Date</label>
-                        <input class="form-control" type="date" name="endDate" value="{{$product->endDate}}" id="endDate">
+                        <input class="form-control" type="date" name="endDate" value="{{$product->endDate}}"
+                            id="endDate">
                     </div>
                     <div class="col">
                         <label class="form-check-label">Discount</label>
-                        <input class="form-control" type="text" name="discount" value="{{$product->discount}}" id="discount">
+                        <input class="form-control" type="text" name="discount" value="{{$product->discount}}"
+                            id="discount">
                     </div>
                 </div>
             </div>
@@ -99,6 +130,16 @@
             }
         });
 
+        $('#photo').change(function() {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+        $('#preview-photo').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+        });
+
+
+
         // $('#photo').change(function() {
         //     let reader = new FileReader();
         //     reader.onload = (e) => {
@@ -106,6 +147,7 @@
         //     }
         //     reader.readAsDataURL(this.files[0]);
         // });
+
         $("#Add").on("click", function() {
             $("#textboxDiv").append("<div class='row pt-3'><div class='col'><label for='exampleInputEmail1' class='form-label'>Option Group</label><select class='form-control'  name='optionGroupId'><option selected disble>Select Option Group</option><option>Size</option><option>Color</option></select></div><div class='col'><label for='exampleInputEmail1' class='form-label'>Option </label><input type='text' class='form-control' placeholder='Enter option' name='option'></div><div class='col'><label for='exampleInputEmail1' class='form-label'>Stock</label><input type='text' class='form-control' placeholder='Enter stock' name='stock'></div><div class='col'><label for='exampleInputEmail1' class='form-label'>Price</label><input type='text' class='form-control' placeholder='Enter price' name='price'>  </div></div><div class='row pt-3'> <div class='col'> <label for='exampleInputEmail1' class='form-label'>Product Gallery <sup class='text-danger'> (To add multiple photo press control button and select image)</sup></label> <input type='file' multiple class='form-control' id='files' name='files' /></div></div>");
         });

@@ -50,6 +50,11 @@ class OptiongroupController extends Controller
      */
     public function store(Request $request)
     {
+
+        // $this->validate($request, [
+        //     'optionGroupName' => '',
+        // ]);
+
         $optionGroup = new Optiongroup();
         $optionGroup->optionGroupName = $request->optionGroupName;
         // $optionGroup->optionId = $request->optionId;

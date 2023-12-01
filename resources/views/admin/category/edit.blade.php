@@ -34,9 +34,11 @@ Category Edit || Shop
             </div>
             <div class="mb-3">
                 <label for="Icon" class="form-label">Icon</label>
-                <input type="file" value="{{$category->icon}}" id="icon" name="icon" class="form-control" placeholder="icon" />
+                <input type="file" value="{{$category->icon}}" id="icon" name="icon" class="form-control"
+                    placeholder="icon" />
                 <br>
-                <img id="preview-icon" src="{{ url('/category/' . $category->icon) }}" alt="" class="mt-3" style="height:100px; width: 100px;">
+                <img id="preview-icon" src="{{ url('/category/' . $category->icon) }}" alt="" class="mt-3"
+                    style="height:100px; width: 100px;">
             </div>
             <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
         </form>
@@ -54,6 +56,7 @@ Category Edit || Shop
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    
     $('#icon').change(function() {
         let reader = new FileReader();
         reader.onload = (e) => {
@@ -61,6 +64,7 @@ Category Edit || Shop
         }
         reader.readAsDataURL(this.files[0]);
     });
+    
     $('#category_form').submit(function(e) {
         e.preventDefault();
         let formData = new FormData(this);
