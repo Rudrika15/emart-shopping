@@ -60,7 +60,7 @@
 
 
                    render: function (data, type, row) {
-                       console.log(row.options);
+                       console.log(row.option);
                 if (row.options && row.options.length > 0) {
                 let optionNames = row.options.map(function (option) {
                 return option.option_name; // Adjust the property name according to your actual database structure
