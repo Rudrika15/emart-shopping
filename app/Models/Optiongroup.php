@@ -10,6 +10,11 @@ class Optiongroup extends Model
    use HasFactory;
    public function option()
    {
-      return $this->belongsTo(Option::class, 'optionId');
+      return $this->belongsTo(Option::class, 'id');
+   }
+
+   public function category()
+   {
+      return $this->hasOne(Category::class, 'id', 'categoryId');
    }
 }

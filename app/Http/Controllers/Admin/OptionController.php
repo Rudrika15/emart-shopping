@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
 
 use App\Models\Option;
+
 use App\Models\Optiongroup;
+use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Request;
+
 
 class OptionController extends Controller
 {
@@ -24,9 +27,9 @@ class OptionController extends Controller
     public function create()
     {
         //
-        $optionGroup= Optiongroup::all();
-      
-        return  view('admin.option.create',compact('optionGroup'));
+        $optionGroup = Optiongroup::all();
+
+        return  view('admin.option.create', compact('optionGroup'));
     }
     public function getAllData(Request $request)
     { {
@@ -55,32 +58,32 @@ class OptionController extends Controller
         $option->option = $request->option;
         $option->save();
         return response()->json([
-			'status' => 200,
+            'status' => 200,
             $option
-		]);
+        ]);
     }
     /**
      * Display the specified resource.
      */
 
-     public function getOption($id = 0)
-     {
-         $optionGroupID = $id;
-         $option = Option::where('optionGroupId', '=', $optionGroupID)->get();
-         print "<select class='form-control'  name='optionIds'>";
-         print  " <option selected disble>Select Option</option>";
- 
-         foreach ($option as $option) {
-             // print "option->option";
-             echo "<option value=" . $option->id . ">" . $option->option . "</option>";
-         }
- 
-         print "</select>";
-         return response()->json([
-             'status' => 200,
-             'Option' => $option
-         ]);
-     }
+    public function getOption($id = 0)
+    {
+        $optionGroupID = $id;
+        $option = Option::where('optionGroupId', '=', $optionGroupID)->get();
+        print "<select class='form-control'  name='optionIds'>";
+        print  " <option selected disble>Select Option</option>";
+
+        foreach ($option as $option) {
+            // print "option->option";
+            echo "<option value=" . $option->id . ">" . $option->option . "</option>";
+        }
+
+        print "</select>";
+        return response()->json([
+            'status' => 200,
+            'Option' => $option
+        ]);
+    }
 
     public function show(Option $option)
     {
@@ -108,7 +111,6 @@ class OptionController extends Controller
      */
     public function delete($id)
     {
-         Option::find($id)->delete();
-       
+        Option::find($id)->delete();
     }
 }

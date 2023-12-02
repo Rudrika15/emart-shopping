@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Optiongroup;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+use Yajra\DataTables\DataTables;
 
 class OptiongroupController extends Controller
 {
@@ -17,13 +19,14 @@ class OptiongroupController extends Controller
 
         return view('admin.optionGroup.index');
     }
+
     public function getAllData(Request $request)
     {
         if ($request->ajax()) {
 
-            $data = Optiongroup::with('option')->select('*');
+            $data = Optiongroup::with('option')->with('category')->get();
 
-            return \Yajra\DataTables\DataTables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="' . URL::route('optionGroup.edit', $row->id) . '"data-toggle="tooltip" data-original-title="Edit" class="btn btn-primary  me-2 btn-sm editOptiongGrp">Edit</a>';
@@ -41,9 +44,10 @@ class OptiongroupController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.optionGroup.create');
+        $category = Category::all();
+        return view('admin.optionGroup.create', compact('category'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -57,11 +61,12 @@ class OptiongroupController extends Controller
 
         $optionGroup = new Optiongroup();
         $optionGroup->optionGroupName = $request->optionGroupName;
+        $optionGroup->categoryId = $request->categoryId;
+
         // $optionGroup->optionId = $request->optionId;
         $optionGroup->save();
-        return response()->json([
-            'status' => 200,
-        ]);
+
+        return redirect()->route('optionGroup.index')->with('status', 'Data saved successfully');
     }
 
     /**
@@ -78,7 +83,8 @@ class OptiongroupController extends Controller
     public function edit($id)
     {
         $optionGroup = Optiongroup::find($id);
-        return view('admin.optionGroup.edit', compact('optionGroup'));
+        $category = Category::all();
+        return view('admin.optionGroup.edit', compact('optionGroup', 'category'));
     }
 
     /**
@@ -89,6 +95,7 @@ class OptiongroupController extends Controller
         $id = $request->optiongroup_id;
         $optionGroup =  Optiongroup::find($id);
         $optionGroup->optionGroupName = $request->optionGroupName;
+        $optionGroup->categoryId = $request->categoryId;
         // $optionGroup->optionId = $request->optionId;
         $optionGroup->save();
         return response()->json([

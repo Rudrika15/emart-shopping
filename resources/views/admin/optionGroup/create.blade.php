@@ -18,7 +18,22 @@
             <div class="alert alert-danger print-error-msg" style="display: none">
                 <ul></ul>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <div class="row">
+                <div class="mb-3 col">
+                    <label for="category" class="form-label">Category</label>
+
+                    <select name="categoryId" id="categoryId" class="form-control">
+                        <option selected> --Select Category--</option>
+                        @foreach ($category as $category)
+                        <option value="{{$category->id}}">{{$category->title}}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>

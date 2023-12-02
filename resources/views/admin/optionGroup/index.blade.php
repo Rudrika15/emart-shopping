@@ -17,8 +17,9 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Category</th>
                     <th>Option Group Name</th>
-                    <th>option</th>
+                    <th>Option</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -45,11 +46,44 @@
                     name: "id",
                     orderable: false,
                 },
+
+                {
+                    data: "category.title",
+                    name: "category.title",
+                    orderable: false,
+                },
+
                 {
                     data: "optionGroupName",
                     name: "optionGroupName",
                     orderable: false,
-                //    render: function(data, type, row) {
+
+
+                   render: function (data, type, row) {
+                       console.log(row.options);
+                if (row.options && row.options.length > 0) {
+                let optionNames = row.options.map(function (option) {
+                return option.option_name; // Adjust the property name according to your actual database structure
+                }).join(", ");
+                return optionNames;
+                } else {
+                return "";
+                }
+                },
+
+                },
+                
+
+                {
+                    data: "option",
+                    name: "option",
+                    orderable: false
+                },
+
+                
+                // {
+                //     data: null,
+                //     render: function(data, type, row) {
                 //         if (row.option && row.option.length > 0) {
                 //             let optionNames = row.option.map(function(option) {
                 //                 return option.option;
@@ -60,23 +94,8 @@
                 //             return ""; // Handle the case when there are no options
                 //         }
                 //     },
-
-                },
-                {
-                    data: null,
-                    render: function(data, type, row) {
-                        if (row.option && row.option.length > 0) {
-                            let optionNames = row.option.map(function(option) {
-                                return option.option;
-                            }).join(", ");
-                            console.log(optionNames); 
-                            return  optionNames;
-                        } else {
-                            return ""; // Handle the case when there are no options
-                        }
-                    },
-                    orderable: false,
-                },
+                //     orderable: false,
+                // },
                 // {
                 //     data: "options.option",
                 //     name: "options.option",

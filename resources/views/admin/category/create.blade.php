@@ -41,10 +41,32 @@ Category Add || Shop
                     @enderror
                 </span>
             </div>
-            <div class="alert alert-danger print-error-msg" style="display: none">
-                <ul></ul>
+
+            <div class="mb-3">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="isParent" name="isParent" id="isParent"> Is
+                    Parent
+                </label>
             </div>
-            <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
+
+            <div class="row">
+                <div class="mb-3 col">
+                    <label for="parentcategory" class="form-label">Parent Category</label>
+
+                    <select name="categoryId" id="categoryId" class="form-control">
+                        <option selected> --Select Parent Category--</option>
+                        {{-- @foreach ($category as $category) --}}
+                        {{-- <option value="{{$category->id}}">{{$category->title}}</option> --}}
+                        {{-- @endforeach --}}
+
+                    </select>
+                </div>
+
+
+                <div class="alert alert-danger print-error-msg" style="display: none">
+                    <ul></ul>
+                </div>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
