@@ -10,7 +10,7 @@ class Optiongroup extends Model
    use HasFactory;
    public function option()
    {
-      return $this->belongsTo(Option::class, 'id');
+      return $this->hasMany(Option::class, 'optionGroupId');
    }
 
    public function category()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Option;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Optiongroup;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
@@ -48,20 +49,115 @@ class OptionController extends Controller
             }
         }
     }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'optionGroupId' => 'required',
+            'option' => 'required|array',
+        ]);
+
+        $optionGroupId = $request->optionGroupId;
+        $options = $request->option;
+
+        // Concatenate options into a single string
+        $optionsString = implode(',', $options);
+
+        try {
+            Option::create([
+                'optionGroupId' => $optionGroupId,
+                'option' => $optionsString,
+            ]);
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Options saved successfully.',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Error saving options: ' . $e->getMessage(),
+            ]);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $option =  new Option();
-        $option->optionGroupId = $request->optionGroupId;
-        $option->option = $request->option;
-        $option->save();
-        return response()->json([
-            'status' => 200,
-            $option
-        ]);
-    }
+    // public function store(Request $request)
+    // {
+    //     // Check if 'options' key exists in the request data
+    //     // if ($request->has('option')) {
+    //     // Assuming 'options' is an array of option data
+
+    //     $this->validate($request, [
+    //         'optionGroupId' => 'required',
+    //         'option' => 'required|array',
+    //     ]);
+    //     $optionGroupId = $request->optionGroupId;
+    //     $optionList = $request->option;
+
+    //     foreach ($optionList as $opitonIds) {
+    //         $optionsData[] = [
+    //             'optionGroupId' => $optionGroupId,
+    //             'option' => $opitonIds
+    //         ];
+    //         // $options = new Option();
+    //         // $options->optionGroupId = $request->optionGroupId;
+    //         // $options->option = $request->$option;
+    //         // // dd($option);
+    //         // return $options->save();
+    //         // return $request->options;
+    //         foreach ($optionsData as $data) {
+    //             $store =  Option::create($data);
+    //         }
+    //     }
+
+
+    //     return "True";
+    //     // return response()->json([
+    //     //     'status' => 200,
+    //     //     'message' => 'Options saved successfully.',
+    //     // ]);
+    //     // }
+
+    //     return response()->json([
+    //         'status' => 400,
+    //         'message' => 'No options provided in the request.',
+    //     ]);
+    // }
+
+
+
+
+    // {
+    //     $option =  new Option();
+    //     $option->optionGroupId = $request->optionGroupId;
+    //     $option->option = $request->option;
+    //     $option->save();
+    //     return response()->json([
+    //         'status' => 200,
+    //         $option
+    //     ]);
+    // }
     /**
      * Display the specified resource.
      */

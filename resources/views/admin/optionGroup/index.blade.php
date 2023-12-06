@@ -19,7 +19,7 @@
                     <th>No</th>
                     <th>Category</th>
                     <th>Option Group Name</th>
-                    <th>Option</th>
+                    <th width="300px">Option</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -59,48 +59,26 @@
                     orderable: false,
 
 
-                   render: function (data, type, row) {
-                       console.log(row.option);
-                if (row.options && row.options.length > 0) {
-                let optionNames = row.options.map(function (option) {
-                return option.option_name; // Adjust the property name according to your actual database structure
-                }).join(", ");
-                return optionNames;
-                } else {
-                return "";
-                }
-                },
 
                 },
                 
 
-                {
-                    data: "option",
-                    name: "option",
-                    orderable: false
-                },
-
-                
-                // {
-                //     data: null,
-                //     render: function(data, type, row) {
-                //         if (row.option && row.option.length > 0) {
-                //             let optionNames = row.option.map(function(option) {
-                //                 return option.option;
-                //             }).join(", ");
-                //             console.log(optionNames); 
-                //             return  optionNames;
-                //         } else {
-                //             return ""; // Handle the case when there are no options
-                //         }
-                //     },
-                //     orderable: false,
-                // },
-                // {
-                //     data: "options.option",
-                //     name: "options.option",
-                //     orderable: false,
-                // },
+               {
+            name: "option",
+            orderable: false,
+            render: function (data, type, row) {
+            if (row.option && row.option.length > 0) {
+            let optionNames = row.option.map(function (option) {
+            return option.option;
+            }).join(", ");
+            // console.log(optionNames);
+            return optionNames;
+            } else {
+            return "No data Found"; // Handle the case when there are no options
+            }
+            },
+            },      
+             
                 {
                     data: "action",
                     name: "action",
@@ -108,6 +86,8 @@
                 },
             ],
         });
+
+
         // delete function
         $('body').on('click', '.deleteOption', function(e) {
             e.preventDefault();

@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Option extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'optionGroupId',
+        'option',
+    ];
+
+
     public function optiongroup()
     {
         return $this->belongsTo(Optiongroup::class, 'optionGroupId');

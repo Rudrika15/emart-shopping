@@ -15,6 +15,7 @@
                 <label for="exampleInputEmail1" class="form-label">Title</label>
                 <input type="text" class="form-control" id="title" name="title" />
             </div>
+
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Category</label>
                 <select class="form-control" id="catId" name="catId">
@@ -25,6 +26,7 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Photo</label>
                 <input type="file" class="form-control" id="photo" name="photo" />

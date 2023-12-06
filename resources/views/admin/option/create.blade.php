@@ -12,16 +12,17 @@
         <form id="create" method="POST">
             @csrf
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Option</label>
-                <input type="text" class="form-control" id="option" name="option" />
-            </div>
-            <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Option Group</label>
                 <select class="form-control" id="optionGroupId" name="optionGroupId">
                     @foreach($optionGroup as $optionGroup)
                     <option value="{{$optionGroup->id}}">{{$optionGroup->optionGroupName}}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Option</label>
+                <input type="text" class="form-control" id="option" name="option" />
             </div>
 
             <div class="alert alert-danger print-error-msg" style="display: none">
