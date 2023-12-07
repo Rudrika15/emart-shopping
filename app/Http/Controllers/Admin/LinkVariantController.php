@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use DB;
+use App\Models\Option;
 use App\Models\Category;
 use App\Models\LinkVariant;
-use App\Models\Option;
 use App\Models\Optiongroup;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class LinkVariantController extends Controller
 {
@@ -71,17 +72,13 @@ class LinkVariantController extends Controller
         $categoryId = $request->categoryId;
 
         // Check if the inputs are present in the request
-        if ($request->filled('optiongroup')  && $request->title) {
+        if ($request->filled('optiongroup') && $request->filled('title')) {
             $optionGroups = $request->input('optiongroup');
             $titles = $request->input('title');
-            return response()->json([
-                'data' => [$optionGroups, $titles]
-            ]);
+
             // Ensure that the option groups and titles have the same count
             if (count($optionGroups) !== count($titles)) {
-                return response()->json([
-                    'messgae' => "First Error"
-                ]);
+                return redirect()->back()->with("error", "Option groups and titles count mismatch");
             }
 
             foreach ($optionGroups as $index => $opt) {
@@ -93,15 +90,14 @@ class LinkVariantController extends Controller
                 $linkVariant->categoryId = $categoryId;
                 $linkVariant->save();
             }
-            return response()->json([
-                'messgae' => "Created"
-            ]);
+
+            // Redirect to the index page on success
+            return redirect()->route('link.index')->with("success", "Link Created Successfully.");
         } else {
-            return response()->json([
-                'messgae' => "Last Error"
-            ]);
+            return redirect()->back()->with("error", "Option groups or titles missing in the request");
         }
     }
+
 
     /**
      * Display the specified resource.

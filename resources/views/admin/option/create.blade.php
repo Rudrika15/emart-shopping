@@ -2,21 +2,22 @@
 <div class="card">
     <div class="card-header">
         <div class="d-flex justify-content-between">
-            <div class="fs-4 fw-1">Option Add/variant Add</div>
+            <div class="fs-4 fw-1">Option Add/ Variant Add</div>
             <div class="">
                 <a href="{{route('option.index')}}" class="btn btn-success">Back</a>
             </div>
         </div>
     </div>
+
     <div class="card-body">
-        <form id="create" method="POST">
+        <form id="create" method="POST" action="{{route('option.store')}}">
             @csrf
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Option Group</label>
                 <select class="form-control" id="optionGroupId" name="optionGroupId">
-                    @foreach($optionGroup as $optionGroup)
+                    {{-- @foreach($optionGroup as $optionGroup) --}}
                     <option value="{{$optionGroup->id}}">{{$optionGroup->optionGroupName}}</option>
-                    @endforeach
+                    {{-- @endforeach --}}
                 </select>
             </div>
 
